@@ -1,5 +1,9 @@
 # Auth Page
 
+## Node Version
+
+18.12.1
+
 ## Installation
 
 Clone this repo
