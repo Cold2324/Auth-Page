@@ -33,3 +33,6 @@ pnpm run build
 | [Firebase](https://firebase.google.com/) | Firebase is an app development platform that helps you build and grow apps and games users love. Backed by Google and trusted by millions of businesses around the world |
 
 ## Gallery
+
+![Login Page](https://github.com/Cold2324/Auth-Page/blob/main/public/Login%20Page.png)
+![Sign Up Page](https://github.com/Cold2324/Auth-Page/blob/main/public/Sign%20Up%20Page.png)
