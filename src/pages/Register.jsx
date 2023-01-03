@@ -1,5 +1,7 @@
 import Button from '../components/Button'
 import Input from '../components/Input'
+import Alert from '../components/Alert'
+import { success } from '../components/alertTypes'
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 
@@ -8,6 +10,7 @@ export default function Register() {
     email: '',
     password: '',
   })
+  const [showAlert, setShowAlert] = useState(false)
   const { createUser } = useAuth()
 
   const handleChangeEmail = (e) => {
@@ -19,11 +22,12 @@ export default function Register() {
   }
 
   const handleCreateUser = () => {
-    createUser(user.email, user.password)
+    createUser(user.email, user.password).then((data) => setShowAlert(true))
   }
 
   return (
     <>
+      {showAlert && <Alert type={success} setShowAlert={setShowAlert} />}
       <Button className="absolute right-2 top-2 p-3" text="Login" />
       <section className="w-[1000px] flex items-center justify-center">
         <div className="flex flex-col gap-5 w-[400px]">
