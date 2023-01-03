@@ -4,6 +4,7 @@ import Alert from '../components/Alert'
 import { danger, success } from '../components/alertTypes'
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 export default function Register() {
   const [user, setUser] = useState({
@@ -13,6 +14,7 @@ export default function Register() {
   const [errors, setErrors] = useState('')
   const [showAlert, setShowAlert] = useState(false)
   const [showSpin, setShowSpin] = useState(false)
+  const navigate = useNavigate()
   const { createUser } = useAuth()
 
   const handleChangeEmail = (e) => {
@@ -51,7 +53,11 @@ export default function Register() {
       {errors !== '' && (
         <Alert type={danger} setShowAlert={setShowAlert} eMessage={errors} />
       )}
-      <Button className="absolute right-2 top-2 p-3" text="Login" />
+      <Button
+        className="absolute right-2 top-2 p-3"
+        text="Login"
+        onClick={() => navigate('/login')}
+      />
       <section className="w-[1000px] flex items-center justify-center">
         <div className="flex flex-col gap-5 w-[400px]">
           <div className="flex justify-center">
