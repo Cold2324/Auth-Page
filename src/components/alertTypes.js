@@ -24,7 +24,7 @@ const success = {
     background: 'bg-green-100',
     text: 'text-green-700',
     box: 'border border-t-0 border-green-400 rounded-b px-4 py-3',
-    content: 'You have been registered.',
+    content: 'Successful process',
   },
 }
 

@@ -16,5 +16,13 @@ export default function AuthContext({ children }) {
     await createUserWithEmailAndPassword(auth, email, password)
   }
 
-  return <context.Provider value={{ createUser }}>{children}</context.Provider>
+  const login = async (email, password) => {
+    await signInWithEmailAndPassword(auth, email, password)
+  }
+
+  return (
+    <context.Provider value={{ createUser, login }}>
+      {children}
+    </context.Provider>
+  )
 }
