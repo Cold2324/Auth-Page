@@ -1,7 +1,7 @@
 import Button from '../components/Button'
 import Input from '../components/Input'
 import Alert from '../components/Alert'
-import { success } from '../components/alertTypes'
+import { danger, success } from '../components/alertTypes'
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 
@@ -10,7 +10,9 @@ export default function Register() {
     email: '',
     password: '',
   })
+  const [errors, setErrors] = useState('')
   const [showAlert, setShowAlert] = useState(false)
+  const [showSpin, setShowSpin] = useState(false)
   const { createUser } = useAuth()
 
   const handleChangeEmail = (e) => {
@@ -22,12 +24,33 @@ export default function Register() {
   }
 
   const handleCreateUser = () => {
-    createUser(user.email, user.password).then((data) => setShowAlert(true))
+    setShowSpin(true)
+    createUser(user.email, user.password)
+      .then((data) => {
+        setShowSpin(false)
+        setShowAlert(true)
+        setErrors('')
+      })
+      .catch((e) => {
+        setErrors(e.message)
+        setShowSpin(false)
+        setShowAlert(true)
+      })
   }
 
   return (
     <>
-      {showAlert && <Alert type={success} setShowAlert={setShowAlert} />}
+      {showAlert && errors === '' && (
+        <Alert
+          type={success}
+          setShowAlert={setShowAlert}
+          // showSpin={showSpin}
+          // setShowSpin={setShowSpin}
+        />
+      )}
+      {errors !== '' && (
+        <Alert type={danger} setShowAlert={setShowAlert} eMessage={errors} />
+      )}
       <Button className="absolute right-2 top-2 p-3" text="Login" />
       <section className="w-[1000px] flex items-center justify-center">
         <div className="flex flex-col gap-5 w-[400px]">
@@ -46,7 +69,12 @@ export default function Register() {
             placeholder="**********"
             onChange={handleChangePassword}
           />
-          <Button className="p-2" text="Sign Up" onClick={handleCreateUser} />
+          <Button
+            className="p-2"
+            text="Sign Up"
+            onClick={handleCreateUser}
+            showSpin={showSpin}
+          />
         </div>
       </section>
     </>

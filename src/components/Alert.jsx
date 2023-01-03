@@ -1,4 +1,4 @@
-export default function Alert({ type, setShowAlert }) {
+export default function Alert({ type, setShowAlert, eMessage = '' }) {
   const { title, content } = type
 
   const handleShowOff = () => {
@@ -8,15 +8,15 @@ export default function Alert({ type, setShowAlert }) {
   return (
     <div role="alert" className="absolute top-5 left-5">
       <div
-        class={`${title.background} ${title.text} ${title.box} flex justify-between items-center`}
+        className={`${title.background} ${title.text} ${title.box} flex justify-between items-center`}
       >
         <span>{title.title}</span>
-        <span className="cursor-pointer" onClick={handleShowOff}>
+        <button className="cursor-pointer" onClick={handleShowOff}>
           &#10006;
-        </span>
+        </button>
       </div>
-      <div class={`${content.background} ${content.text} ${content.box}`}>
-        <p>{content.content}</p>
+      <div className={`${content.background} ${content.text} ${content.box}`}>
+        <p>{eMessage !== '' ? eMessage : content.content}</p>
       </div>
     </div>
   )
